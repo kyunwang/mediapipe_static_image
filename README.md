@@ -1,5 +1,10 @@
 # Mediapipe Python Static Image
 
+A simple Python setup of MediaPipe - using the Static Image setting
+
+
+Based on the [Mediapipe Python example][1] and [Google Colab Example][2]
+
 # Getting Started
 
 **Requirements**
@@ -21,4 +26,6 @@ After cloning/downloading/degitting etc.
 4. `exports/output.json` and `exports/images` should now be populated
 5. Enter `deactivate` to exit the virtual environment 
 
-<!-- https://colab.research.google.com/drive/1FvH5eTiZqayZBOHZsFm-i7D-JvoB9DVz#scrollTo=BAivyQ_xOtFp -->
+
+[1]: https://google.github.io/mediapipe/solutions/hands#python-solution-api
+[2]: https://colab.research.google.com/drive/1FvH5eTiZqayZBOHZsFm-i7D-JvoB9DVz#scrollTo=BAivyQ_xOtFp

@@ -8,6 +8,13 @@ from PIL import Image
 
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
+Landmarks = mp_hands.HandLandmark
+IndexFinger = [
+    Landmarks['INDEX_FINGER_DIP'],
+    Landmarks['INDEX_FINGER_MCP'],
+    Landmarks['INDEX_FINGER_PIP'],
+    Landmarks['INDEX_FINGER_TIP']
+]
 
 imgs = []
 valid_images = ['.jpg','.gif','.png','.tga']
@@ -19,9 +26,6 @@ export_path = f'{os.getcwd()}/exports'
 
 
 output = []
-
-print(mp_hands.HAND_CONNECTIONS)
-print(mp_hands.HandLandmark.INDEX_FINGER_TIP)
 
 
 for f in os.listdir(path):
@@ -57,14 +61,22 @@ with mp_hands.Hands(
         for hand_landmarks in results.multi_hand_landmarks:
             indexTip = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
 
-            # print('hand_landmarks:', hand_landmarks)
-            print(
-                f'Index finger tip coordinates: (',
-                f'{indexTip.x * image_width}, '
-                f'{indexTip.y * image_height})'
-            )
+       
+            # Getting the indexTip only
+            # output.append({ 'file': f'{str(index)}.jpg', 'x': indexTip.x, 'y': indexTip.y })
 
-            output.append({ 'file': f'{str(index)}.jpg', 'x': indexTip.x, 'y': indexTip.y })
+            # Get all landmarks
+            output.append({ 'file': f'{str(index)}.jpg', 'landmarks': [] })
+            # for lm_index, landmark in enumerate(hand_landmarks.landmark):
+            #     output[-1]['landmarks'].append(landmark.x)
+            #     output[-1]['landmarks'].append(landmark.y)
+
+            for landmark in IndexFinger:
+                output[-1]['landmarks'].append(hand_landmarks.landmark[landmark].x)
+                output[-1]['landmarks'].append(hand_landmarks.landmark[landmark].y)
+
+
+
 
             # Drawing on the image
             mp_drawing.draw_landmarks(annotated_image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
@@ -80,3 +92,4 @@ with mp_hands.Hands(
     # Export to json
     with open(f'{export_path}/output.json', 'w') as out_file:
         json.dump(output, out_file, ensure_ascii=False)
+        print('Exported JSON')
