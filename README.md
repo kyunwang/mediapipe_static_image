@@ -1,9 +1,16 @@
 # Mediapipe Python Static Image
 
-A simple Python setup of MediaPipe - using the Static Image setting
+A simple Python setup of MediaPipe - using the Static Image setting  
+
+The script does the following:
+- Detect hand(s) from images
+- Move detected images with and without annotation to the `export` directory
+- Generate a JSON for each image with:
+  - landmarks in float array format
+  - average of the center bounding box of the found hand
 
 
-Based on the [Mediapipe Python example][1] and [Google Colab Example][2]
+*Based on the [Mediapipe Python example][1] and [Google Colab Example][2]*
 
 # Getting Started
 
@@ -13,7 +20,7 @@ Based on the [Mediapipe Python example][1] and [Google Colab Example][2]
 
 **Assets**
 - Have an empty directory here `projectRoot/exports/images`
-- Have your input images in `projectRoot/images`
+- Have your input images in `projectRoot/input/images`
 
 **Steps**
 After cloning/downloading/degitting etc.
@@ -23,7 +30,7 @@ After cloning/downloading/degitting etc.
 `pip install -r requirements.txt`
 3. Run the script with
 `python3 init.py`
-4. `exports/output.json` and `exports/images` should now be populated
+4. `exports/<inputDirName>/output.json` and `exports/<inputDirName>/images` should now be populated
 5. Enter `deactivate` to exit the virtual environment 
 
 
